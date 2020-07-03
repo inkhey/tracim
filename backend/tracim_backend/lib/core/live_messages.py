@@ -12,6 +12,7 @@ from tracim_backend.views.core_api.schemas import LiveMessageSchema
 TLM_EVENT_NAME = "message"
 STREAM_OPENED_EVENT_NAME = "stream-opened"
 KEEPALIVE_EVENT_NAME = "keepalive"
+AVAST_FIX_EVENT_NAME = "avast-fix"
 
 
 class JsonServerSideEvent(object):
@@ -41,9 +42,13 @@ class LiveMessagesLib(object):
         channel_name = "user_{}".format(message.receiver_id)
         message_schema = LiveMessageSchema()
         message_as_dict = message_schema.dump(message).data
-        self.publish_dict(channel_name, message_as_dict=message_as_dict)
-
-    def publish_dict(self, channel_name: str, message_as_dict: typing.Dict[str, typing.Any]):
         self.grip_pub_control.publish_http_stream(
             channel_name, str(JsonServerSideEvent(data=message_as_dict, event=TLM_EVENT_NAME))
+        )
+        self.grip_pub_control.wait_all_sent()
+        # INFO SG 2020-07-03 - Needed for Avast WebShield on macOs
+        # If not present the message is received by the browser
+        # when the next keep-alive event is received
+        self.grip_pub_control.publish_http_stream(
+            channel_name, "event:{}\ndata:\n\n".format(AVAST_FIX_EVENT_NAME)
         )
