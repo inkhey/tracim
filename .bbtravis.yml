@@ -1,25 +1,3 @@
----
-env:
-  global:
-    - DEFAULT_SQLITE_SQLALCHEMY__URL=sqlite:////tmp/tracim.sqlite
-    - DEFAULT_MYSQL_SQLALCHEMY__URL=mysql+pymysql://user:secret@127.0.0.1:3306/tracim_test
-    - DEFAULT_POSTGRES_SQLALCHEMY__URL=postgresql://user:secret@127.0.0.1:5432/tracim_test?client_encoding=utf8
-    - DB=sqlite
-    - COVERAGE=0
-    - PSERVE_LOG=/tmp/pserve_log.log
-    - TRACIM_SQLALCHEMY__URL=$DEFAULT_SQLITE_SQLALCHEMY__URL
-    - TRACIM_DEPOT_STORAGE_NAME=test
-    - TRACIM_DEPOT_STORAGE_DIR=/tmp/test/depot
-    - TRACIM_PREVIEW_CACHE_DIR=/tmp/test/preview_cache
-    - TRACIM_COLOR__CONFIG_FILE_PATH=$TRAVIS_BUILD_DIR/backend/color-test.json
-    - TRACIM_SESSION__DATA_DIR=/tmp/test/sessions/data
-    - TRACIM_SESSION__LOCK_DIR=/tmp/test/sessions/lock
-    - TRACIM_COLLABORATIVE_DOCUMENT_EDITION__FILE_TEMPLATE_DIR=$TRAVIS_BUILD_DIR/backend/tracim_backend/templates/open_documents
-    - TRACIM_CALDAV__RADICALE__STORAGE__FILESYSTEM_FOLDER=/tmp/test/radicale_storage
-    - TEST_CONFIG_FILE_PATH=$TRAVIS_BUILD_DIR/backend/tests_configs.ini
-    - TEST_PUSHPIN_FILE_PATH=$TRAVIS_BUILD_DIR/backend/pushpin_test.conf
-    - TEST_MIGRATION_SCRIPT_LOCATION=$TRAVIS_BUILD_DIR/backend/tracim_backend/migration
-    - TRACIM_SEARCH__ELASTICSEARCH__INDEX_ALIAS=tracim_content_travis_test
 language: python
 python: 3.6
 os: linux
