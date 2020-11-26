@@ -29,3 +29,4 @@ install:
     cmd: |
       ./setup_default_backend.sh root
       ./install_frontend_dependencies.sh root
+      echo "ALL GOOD"
