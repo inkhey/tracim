@@ -25,8 +25,17 @@ python: 3.6
 os: linux
 
 install:
-  - title: install
-    cmd: |
-      ./setup_default_backend.sh root
-      ./install_frontend_dependencies.sh root
-      echo "ALL GOOD"
+  - title: install backend
+    cmd: ./setup_default_backend.sh root
+  - title: install frontend
+    cmd: ./install_frontend_dependencies.sh root
+
+script:
+  - title: code style & linting (backend)
+    cmd: flake8 backend
+  - title: unit tests (backend)
+    cmd: pytest backend --ignore "backend/tracim_backend/tests/functional" --ignore "backend/tracim_backend/tests/commands"
+  - title: API tests (backend)
+    cmd: pytest backend/tracim_backend/tests/functional backend/tracim_backend/tests/commands
+  - title: unit tests(frontend)
+    cmd: ./run_frontend_unit_test.sh
