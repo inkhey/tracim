@@ -77,7 +77,7 @@ debian_install() {
         log "Yarn is not installed. Adding its repository."
 
         debian_install_curl
-
+        apt-get -qy install apt-transport-https
         curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | $SUDO apt-key add -
         echo "deb https://dl.yarnpkg.com/debian/ stable main" | $SUDO tee /etc/apt/sources.list.d/yarn.list
 
