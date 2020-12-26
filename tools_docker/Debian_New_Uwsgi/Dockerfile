@@ -45,6 +45,14 @@ RUN \
     } \
     && get_source_from_github $TAG $BRANCH
 
+RUN git clone && cd preview-generator/ && git checkout "fix/xxx__make_some_builders_not_required" && cd -; \
+
+RUN \
+# Go in backend folder
+    cd /preview-generator \
+# Install backend
+    && python3 -m pip install -e "."
+
 RUN \
 # Go in backend folder
     cd /tracim/backend \
@@ -101,26 +109,19 @@ RUN \
     && apt update \
     && apt install -qy \
         apache2 \
-        ffmpeg \
         ghostscript \
         gnupg \
         imagemagick \
-        inkscape \
         libapache2-mod-proxy-uwsgi \
-        libreoffice \
         poppler-utils \
         postgresql-client \
         pushpin \
         qpdf \
         redis-server \
         supervisor \
-        ufraw-batch \
         uwsgi \
         uwsgi-plugin-python3 \
         vim \
-        xvfb \
-        gocryptfs \
-        fuse \
 # Remove default conf about apache2
     && rm /etc/apache2/sites-enabled/000-default.conf \
 # Do not show apache version

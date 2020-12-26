@@ -1,0 +1,9 @@
+xvfbwrapper==0.2.9
+ffmpeg-python==0.2.0
+future==0.18.2            # via ffmpeg-python
+cairocffi==1.1.0          # via cairosvg
+cairosvg==2.4.2           # via preview-generator
+cffi==1.13.2              # via cairocffi
+cssselect2==0.2.2         # via cairosvg
+tinycss2==1.0.2           # via cairosvg, cssselect2
+webencodings==0.5.1       # via tinycss2
