@@ -45,12 +45,12 @@ RUN \
     } \
     && get_source_from_github $TAG $BRANCH
 
-RUN git clone && cd preview-generator/ && git checkout "fix/xxx__make_some_builders_not_required" && cd -; \
-
-RUN \
-# Go in backend folder
-    cd /preview-generator \
-# Install backend
+ARG PG_BRANCH="fix/xxx__make_some_builders_not_required"
+ARG PG_REPO="https://github.com/algoo/preview-generator.git"
+RUN git clone "$PG_REPO" \
+    && cd preview-generator/ \
+    && git checkout "$PG_BRANCH" \
+    && cd /preview-generator \
     && python3 -m pip install -e "."
 
 RUN \
