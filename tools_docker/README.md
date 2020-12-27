@@ -238,3 +238,26 @@ Ex: `docker build --build-arg TAG="release_02.00.00" -t algoo/tracim:release_02.
 By default, the Docker image is built from the main repository of Tracim. To clone Tracim from another repository, use the REPO argument. Don't forget to set a suitable image name.
 
 Ex: `docker build --build-arg REPO="https://github.com/<me>/tracim.git" -t algoo/tracim:myrepo .`
+
+#### ARM Build (Experimental):
+
+To try to generate a valid ARM Build for tracim, some work need to be done in refactoring
+docker image and preview-generator dependencies.
+
+To test it on your own AMD64 machine, you first need to activate buildx feature of
+docker and install qemu-user-static.
+see also: https://medium.com/@artur.klauser/building-multi-architecture-docker-images-with-buildx-27d80f7e2408
+
+a first try has been began in poc/ARM_build branch.
+
+
+then do:
+```
+docker buildx build --build-arg BRANCH="poc/ARM_build branch" --platform linux/arm64/v8 -t inkhey/tracim:test .
+```
+for arm64/aarch64/v8
+
+```
+docker buildx build --build-arg BRANCH="poc/ARM_build branch" --platform linux/arm/v7 -t inkhey/tracim:test .
+```
+for armhf/arm/v7
